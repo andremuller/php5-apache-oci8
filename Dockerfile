@@ -16,7 +16,8 @@ RUN unzip /tmp/instantclient-basiclite-linux.x64-12.2.0.1.0.zip -d /usr/local/ \
 # install oci8
 RUN ln -s /usr/local/instantclient_12_2 /usr/local/instantclient \
     && ln -s /usr/local/instantclient/libclntsh.so.12.1 /usr/local/instantclient/libclntsh.so \
-    && echo 'instantclient,/usr/local/instantclient' | pecl install oci8
+    && docker-php-ext-configure oci8 --with-oci8=instantclient,/usr/local/instantclient \
+    && docker-php-ext-install oci8    
 
 ENV LD_LIBRARY_PATH /usr/local/instantclient_12_2/
 
